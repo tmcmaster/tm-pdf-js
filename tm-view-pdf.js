@@ -1,5 +1,6 @@
 import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
 // import {} from '@polymer/polymer/lib/elements/dom-repeat.js';
+import {} from '@polymer/polymer/lib/elements/dom-if.js';
 
 // import './node_modules/@telecomsante/pdf-viewer/pdf-viewer.js ';
 
@@ -61,6 +62,8 @@ class TMViewPDF extends PolymerElement {
     _createURL(file, testMode) {
         if (file !== undefined) {
             return (testMode ? '../web/viewer.html?file='+file : '/node_modules/tm-view-pdf/web/viewer.html?file='+file);
+        } else {
+            return undefined;
         }
     }
     _checkReadyToLoad(url) {
