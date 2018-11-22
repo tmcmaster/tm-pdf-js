@@ -1,9 +1,10 @@
 {
-  "name": "tm-pdf-js",
+  "name": "tm-view-pdf",
   "description": "Polymer Web Component to use Mozilla pdf.js as a PDF viewer.",
-  "main": "tm-pdf-js.js",
+  "main": "tm-view-pdf.js",
   "dependencies": {
-    "@polymer/polymer": "^3.0.0"
+    "@polymer/polymer": "^3.0.0",
+    "@telecomsante/pdf-viewer": "^3.0.0-pre.1"
   },
   "devDependencies": {
     "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
