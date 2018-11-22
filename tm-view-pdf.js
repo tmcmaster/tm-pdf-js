@@ -24,7 +24,7 @@ class TMViewPDF extends PolymerElement {
                 }
             </style>
             <template is="dom-if" if="[[readyToLoad]]">
-                <iframe src="/web/viewer.html?file=[[file]]"></iframe>
+                <iframe src="[[url]]"></iframe>
             </template>
             <!--<iframe src="/web/viewer.html?file=[[file]]"></iframe>-->
         `;
@@ -45,11 +45,24 @@ class TMViewPDF extends PolymerElement {
             },
             readyToLoad: {
                 type: Boolean,
-                computed: '_checkReadyToLoad(file)'
+                computed: '_checkReadyToLoad(url)'
+            },
+            testMode: {
+                type: Boolean,
+                value: false
+            },
+            url: {
+                type: String,
+                computed: '_createURL(file, testMode)'
             }
         };
     }
 
+    _createURL(file, testMode) {
+        if (file !== undefined) {
+            return (testMode ? '/node_modules/tm-view-pdf/web/viewer.html?file='+file : '../web/viewer.html?file='+file);
+        }
+    }
     _checkReadyToLoad(file) {
         return (file !== undefined);
     }
