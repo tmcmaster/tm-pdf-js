@@ -63,8 +63,8 @@ class TMViewPDF extends PolymerElement {
             return (testMode ? '../web/viewer.html?file='+file : '/node_modules/tm-view-pdf/web/viewer.html?file='+file);
         }
     }
-    _checkReadyToLoad(file) {
-        return (file !== undefined);
+    _checkReadyToLoad(url) {
+        return (url !== undefined);
     }
     ready() {
         super.ready();
