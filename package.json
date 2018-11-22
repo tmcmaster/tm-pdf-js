@@ -13,5 +13,29 @@
     "chai": "^4.2.0",
     "mocha": "^5.2.0",
     "wct-mocha": "^1.0.0"
-  }
+  },
+  "version": "1.0.0",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tmcmaster/tm-view-pdf.git"
+  },
+  "keywords": [
+    "polymer",
+    "web",
+    "component",
+    "pdf",
+    "viewer"
+  ],
+  "author": "Tim McMaster",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tmcmaster/tm-view-pdf/issues"
+  },
+  "homepage": "https://github.com/tmcmaster/tm-view-pdf#readme"
 }
