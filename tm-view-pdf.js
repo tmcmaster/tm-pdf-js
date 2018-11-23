@@ -1,5 +1,5 @@
-import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
-import {} from '@polymer/polymer/lib/elements/dom-if.js';
+import {html, PolymerElement} from '/node_modules/@polymer/polymer/polymer-element.js';
+import {} from '/node_modules/@polymer/polymer/lib/elements/dom-if.js';
 
 /**
  * @customElement
@@ -18,7 +18,7 @@ class TMViewPDF extends PolymerElement {
                   box-sizing: border-box;
                   margin: 2%;
                   width: 96%;
-                  border: solid lightgray 1px;
+                  border: solid lightgray 2px;
                 }
             </style>
 
@@ -55,7 +55,7 @@ class TMViewPDF extends PolymerElement {
     ready() {
         super.ready();
 
-        this.loadScript('../lib/pdf.js', () => {
+        this.loadScript('lib/pdf.js', () => {
             this.PDF = pdfjsLib;
             this.build();
         });
