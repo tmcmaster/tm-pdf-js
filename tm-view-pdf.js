@@ -1,5 +1,5 @@
-import {html, PolymerElement} from '/node_modules/@polymer/polymer/polymer-element.js';
-import {} from '/node_modules/@polymer/polymer/lib/elements/dom-if.js';
+import {html, PolymerElement} from './node_modules/@polymer/polymer/polymer-element.js';
+import {} from './node_modules/@polymer/polymer/lib/elements/dom-if.js';
 
 /**
  * @customElement
