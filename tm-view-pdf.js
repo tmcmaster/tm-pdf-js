@@ -1,8 +1,5 @@
 import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
-// import {} from '@polymer/polymer/lib/elements/dom-repeat.js';
 import {} from '@polymer/polymer/lib/elements/dom-if.js';
-
-// import './node_modules/@telecomsante/pdf-viewer/pdf-viewer.js ';
 
 /**
  * @customElement
@@ -16,26 +13,21 @@ class TMViewPDF extends PolymerElement {
                   display: inline-block;
                   box-sizing: border-box;
                 }
-                iframe {
-                    display: inline-block;
-                    width:500px;
-                    height: 600px;
-                    box-sizing: border-box;
-                    border: solid lightgray 1px;
+                
+                canvas {
+                  box-sizing: border-box;
+                  margin: 2%;
+                  width: 96%;
+                  border: solid lightgray 1px;
                 }
             </style>
-            <template is="dom-if" if="[[readyToLoad]]">
-                <iframe src="[[url]]"></iframe>
-            </template>
-            <!--<iframe src="/web/viewer.html?file=[[file]]"></iframe>-->
+
+            <div id="viewer"></div>
         `;
     }
 
     static get properties() {
         return {
-            file: {
-                type: String
-            },
             page: {
                 type: Number,
                 value: 1
@@ -44,33 +36,69 @@ class TMViewPDF extends PolymerElement {
                 type: Number,
                 value: 3
             },
-            readyToLoad: {
-                type: Boolean,
-                computed: '_checkReadyToLoad(url)'
-            },
             testMode: {
                 type: Boolean,
                 value: false
             },
             url: {
                 type: String,
-                computed: '_createURL(file, testMode)'
+                observer: '_renderPDF'
             }
         };
     }
 
-    _createURL(file, testMode) {
-        if (file !== undefined) {
-            return (testMode ? '../web/viewer.html?file='+file : '/node_modules/tm-view-pdf/web/viewer.html?file='+file);
-        } else {
-            return undefined;
+    _renderPDF(url) {
+        if (this.PDF !== undefined) {
+            this.rebuild();
         }
-    }
-    _checkReadyToLoad(url) {
-        return (url !== undefined);
     }
     ready() {
         super.ready();
+
+        this.loadScript('../lib/pdf.js', () => {
+            this.PDF = pdfjsLib;
+            this.build();
+        });
+    }
+
+    loadScript(script, success) {
+        const s = document.createElement('script');
+        s.setAttribute('src', script);
+        s.addEventListener('load', () => {
+            success();
+        });
+        document.head.appendChild(s);
+    }
+
+    rebuild() {
+        this.pdf = undefined;
+        this.build();
+    }
+
+    build() {
+        if (this.pdf !== undefined || this.url === undefined) return;
+
+        this.scale = 1;
+
+        this.PDF.getDocument(this.url).promise.then((pdf) => {
+            this.pdf = pdf;
+            let viewer = this.$.viewer;
+            let canvas;
+            for(let page = 1; page <= pdf.numPages; page++) {
+                canvas = document.createElement("canvas");
+                viewer.appendChild(canvas);
+                this.renderPage(page, canvas);
+            }
+        });
+    }
+
+    renderPage(pageNumber, canvas) {
+        this.pdf.getPage(pageNumber).then((page) => {
+            let viewport = page.getViewport(this.scale);
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+            page.render({canvasContext: canvas.getContext('2d'), viewport: viewport});
+        });
     }
 }
 
