@@ -19,3 +19,13 @@ $ polymer test
 ```
 
 Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+
+
+## add to existing Website or App
+
+From command line in main directory:
+```
+npm install @webcomponents/webcomponentsjs --save
+npm install tmcmaster/tm-view-pdf --save
+```
+
