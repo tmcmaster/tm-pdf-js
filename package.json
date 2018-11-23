@@ -3,8 +3,17 @@
   "description": "Polymer Web Component to use Mozilla pdf.js as a PDF viewer.",
   "main": "tm-view-pdf.js",
   "dependencies": {
-    "@polymer/polymer": "^3.0.0",
+    "@polymer/polymer": "^3.0.0"
+  },
+  "devDependencies": {
     "@webcomponents/webcomponentsjs": "^2.0.0"
+  },
+  "version": "1.0.0",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
