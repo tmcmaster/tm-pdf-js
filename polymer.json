@@ -4,5 +4,10 @@
     "rules": [
       "polymer-3"
     ]
-  }
+  },
+  "sources": [
+    "lib/**",
+    "demo/*.pdf",
+    "package.json"
+  ]
 }
